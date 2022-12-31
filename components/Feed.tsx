@@ -9,18 +9,18 @@ export default function Feed() {
 
   return (
     <div
-      className={`grid grid-cols-1 md:grid-cols-2 md: max-w-3xl
-    xl:grid-cols-3 xl:max-w-6xl mx-auto ${
-      !session && "!grid-cols-1 !max-w-3xl"
-    }`}
+      className={`lg:w-[820px] grid lg:grid-cols-[470px_1fr] mx-auto 
+      ${
+        !session && "!grid-cols-1 !max-w-3xl"
+      }`}
     >
-      <section className="col-span-2">
+      <section className="w-[470px] max-w-[98vw] mx-auto">
         <Stories />
         <Posts />
       </section>
       {session && (
-        <section className="hidden lg:inline-grid md: col-span-1">
-          <div className="fixed top-20 pl-10">
+        <section className="hidden lg:inline-grid justify-items-end">
+          <div className="fixed">
             <MiniProfile />
             <Suggestions />
           </div>

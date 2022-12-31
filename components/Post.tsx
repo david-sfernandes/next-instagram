@@ -49,6 +49,7 @@ export default function Post({
   >([]);
   const [likes, setLikes] = useState<QueryDocumentSnapshot<DocumentData>[]>([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const [likeIndex, setLikeIndex] = useState("");
   // comments
   useEffect(
     () =>
@@ -85,31 +86,36 @@ export default function Post({
 
   const likePost = async () => {
     if (hasLiked) {
-      await deleteDoc(doc(db, "posts", id, "likes"));
+      await deleteDoc(doc(db, `posts/${id}/likes/${likeIndex}`));
     } else {
       await addDoc(collection(db, `posts/${id}/likes`), {
         username: (session as CustomSession).user.username,
+        userId: session?.user.uid
       });
     }
   };
 
   useEffect(
-    () =>
-      setHasLiked(
-        likes.findIndex((like) => like.id === session?.user.uid) !== -1
-      ),
-    [likes]
+    () => {
+      let likePos = likes.findIndex((like) => like.data().userId === session?.user.uid);
+      setHasLiked(false);
+      if (likePos > -1) {
+        setHasLiked(true);
+        setLikeIndex(likes[likePos].id)
+      }
+    },
+    [db, likes]
   );
 
   return (
-    <section className="bg-white my-7 border rounded-sm">
-      <div className="flex items-center p-5">
+    <section className="bg-white my-7 border rounded-lg text-sm text-neutral-900">
+      <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}
           alt={username + " image"}
-          height="48"
-          width="48"
-          className="profileImg h-12 mr-3"
+          height="32"
+          width="32"
+          className="profileImg h-8 mr-3"
         />
         <p className="flex-1 font-bold">{username}</p>
         <EllipsisHorizontalIcon className="postBtn" />
@@ -121,7 +127,7 @@ export default function Post({
         height={800}
         alt="Post image"
       />
-      <div className="flex space-x-4 p-4">
+      <div className="flex gap-4 p-4">
         {hasLiked ? (
           <SolidHeartIcon onClick={likePost} className="postBtn text-red-500"  />
         ) : (
@@ -131,9 +137,9 @@ export default function Post({
         <PaperAirplaneIcon className="postBtn -rotate-45" />
         <BookmarkIcon className="postBtn ml-auto" />
       </div>
-      <div className="p-5 truncate">
+      <div className="px-4 truncate">
         {!!likes.length && (
-          <p className="mb-1 font-bold">{likes.length} like(s)</p>
+          <p className="mb-1">Curtido por {hasLiked && (<><b>você</b> e</>) } {likes.length - hasLiked} <b>outras pessoas</b></p>
         )}
         <span className="font-bold mr-1">{username}</span>
         {caption}
@@ -164,12 +170,11 @@ export default function Post({
         )}
         {session && (
           <form className="flex items-center p-4" onSubmit={sendComment}>
-            <FaceSmileIcon className="h-7" />
             <input
               type="text"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
-              className="border-none flex-1 focus:ring-0 outline-none"
+              className="border-none flex-1 focus:ring-0 outline-none text-sm"
             />
             <button
               disabled={!!comment.trim()}

@@ -20,7 +20,7 @@ export default function MiniProfile() {
         />
         <div className="flex-1 mx-4">
           <h2 className="font-bold">{session.user?.username}</h2>
-          <h3 className="text-sm text-gray-400">Welcome to instagram</h3>
+          <h3 className="text-sm text-gray-400">Bem-vindo ao Instagram</h3>
         </div>
         <button onClick={() => signOut()} className="actionBtn text-sm">
           Sign Out

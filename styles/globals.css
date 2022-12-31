@@ -4,9 +4,13 @@
 
 @layer components {
   .navBtn {
-    @apply hidden h-6 md:inline-flex
-    cursor-pointer transform transition-all 
-    duration-150 ease-out hover:scale-125;
+    @apply h-6 w-6 cursor-pointer transform 
+    transition-all duration-150 ease-out 
+    hover:scale-125 text-neutral-800;
+  }
+
+  .navItem {
+    @apply flex space-x-4 my-4;
   }
 
   .postBtn {

@@ -2,13 +2,12 @@ import Image from "next/image";
 import {
   MagnifyingGlassIcon,
   PlusCircleIcon,
-  UserGroupIcon,
   HeartIcon,
-  PaperAirplaneIcon,
-  UserIcon,
   Bars3Icon,
+  MapPinIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
 } from "@heroicons/react/24/outline";
-import { HomeIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
@@ -19,74 +18,89 @@ export default function Header() {
   const [open, setOpen] = useRecoilState(modalState);
 
   return (
-    <header className="shadow-sm border-b bg-white sticky top-0 z-50">
-      <section className="flex justify-between items-center bg-white max-w-6xl mx-5 lg:mx-auto">
-        <Link href="/" className="relative w-10 h-10 lg:w-24 lg:h-24">
-          <Image
-            src="https://links.papareact.com/ocw"
-            fill
-            alt="Instagram Logo"
-            className="object-contain hidden lg:inline-block"
-          />
-          <Image
-            src="https://links.papareact.com/jjm"
-            fill
-            alt="Instagram Logo"
-            className="object-contain lg:hidden"
-          />
-        </Link>
+    <header className="flex lg:flex-col shadow-sm border-r border-b bg-white 
+    sticky lg:fixed top-0 left-0 z-50 w-full lg:w-[245px] h-[60px] lg:h-screen p-3 lg:p-5">
+      <Link href="/" className="relative lg:w-full h-8 lg:mb-8 lg:mt-4">
+        <Image
+          src="https://links.papareact.com/ocw"
+          alt="Instagram Logo"
+          className="object-contain hidden h-8 w-[103px] lg:inline-block"
+          height={30}
+          width={100}
+        />
+        <Image
+          src="https://links.papareact.com/jjm"
+          alt="Instagram Logo"
+          className="object-contain h-8 lg:hidden"
+          height={30}
+          width={30}
+        />
+      </Link>
 
-        <div className="max-w-xs">
-          <div className="relative p-3 rounded-md ">
-            <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
-              <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
-            </div>
-            <input
-              type="text"
-              className="outline-none bg-gray-50 block w-full pl-10 sm:text-sm 
-              border-gray-300 focus:ring-black rounded-md"
-              placeholder="Search..."
-            />
+      <div className="max-w-xs lg:hidden mt-[2px] ml-auto">
+        <div className="relative rounded-md ">
+          <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
+            <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
           </div>
+          <input
+            type="text"
+            className="outline-none bg-gray-100 block w-full pl-10 sm:text-sm 
+             border-0 focus:ring-black rounded-md"
+            placeholder="Search..."
+          />
         </div>
+      </div>
+      <HeartIcon className="navBtn my-auto ml-4 w-7 h-7 lg:hidden" />
 
-        <div className="flex items-center justify-end space-x-4">
-          <Bars3Icon className="w-6 cursor-pointe md:hidden" />
-
-          {session ? (
-            <>
-              <Link href="/">
-                <HomeIcon className="navBtn" />
-              </Link>
-              <div className="relative navBtn">
-                <PaperAirplaneIcon className="navBtn -rotate-45" />
-                <div
-                  className="absolute -top-2 -right-1 text-xs w-4 h-4 rounded-full 
-            bg-red-500 flex items-center justify-center animate-pulse text-white"
-                >
-                  3
-                </div>
-              </div>
-              <PlusCircleIcon
-                onClick={() => setOpen(true)}
-                className="navBtn"
-              />
-              <UserGroupIcon className="navBtn" />
-              <HeartIcon className="navBtn" />
-              <Image
-                onClick={() => signOut()}
-                src={String(session?.user?.image)}
-                className="profileImg h-10 w-10"
-                height={50}
-                width={50}
-                alt="User avatar"
-              />
-            </>
-          ) : (
-            <button onClick={() => signIn()}>Sign In</button>
-          )}
+      <div className="hidden lg:flex flex-col items-start h-full">
+        <Link href="/" className="navItem">
+          <HomeIcon className="navBtn" />
+          <p>Página inicial</p>
+        </Link>
+        <div className="navItem">
+          <MagnifyingGlassIcon className="navBtn" />
+          <p>Pesquisar</p>
         </div>
-      </section>
+        <div className="navItem">
+          <MapPinIcon className="navBtn" />
+          <p>Explorar</p>
+        </div>
+        <div className="navItem">
+          <PlayIcon className="navBtn" />
+          <p>Reels</p>
+        </div>
+        <div className="navItem">
+          <ChatBubbleOvalLeftEllipsisIcon className="navBtn" />
+          <p>Mensagens</p>
+        </div>
+        <div className="navItem">
+          <HeartIcon className="navBtn" />
+          <p>Notificações</p>
+        </div>
+        <div className="navItem cursor-pointer" onClick={() => setOpen(true)}>
+          <PlusCircleIcon className="navBtn" />
+          <p>Criar</p>
+        </div>
+        {session ? (
+          <div className="navItem">
+            <Image
+              onClick={() => signOut()}
+              src={String(session?.user?.image)}
+              className="h-6 w-6 rounded-full"
+              height={50}
+              width={50}
+              alt="User avatar"
+            />
+            <p>Perfil</p>
+          </div>
+        ) : (
+          <button onClick={() => signIn()}>Sign In</button>
+        )}
+        <div className="navItem mt-auto">
+          <Bars3Icon className="navBtn" />
+          <p>Mais</p>
+        </div>
+      </div>
     </header>
   );
 }
