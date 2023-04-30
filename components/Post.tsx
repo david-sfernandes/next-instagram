@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import {
-  FaceSmileIcon,
   BookmarkIcon,
   ChatBubbleBottomCenterIcon,
   HeartIcon,
-  PaperAirplaneIcon,
+  PaperAirplaneIcon
 } from "@heroicons/react/24/outline";
 import { HeartIcon as SolidHeartIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
@@ -21,8 +20,7 @@ import {
   query,
   QueryDocumentSnapshot,
   QuerySnapshot,
-  serverTimestamp,
-  setDoc,
+  serverTimestamp
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Moment from "react-moment";
@@ -90,14 +88,14 @@ export default function Post({
     } else {
       await addDoc(collection(db, `posts/${id}/likes`), {
         username: (session as CustomSession).user.username,
-        userId: session?.user.uid
+        userId: session?.user?.uid
       });
     }
   };
 
   useEffect(
     () => {
-      let likePos = likes.findIndex((like) => like.data().userId === session?.user.uid);
+      let likePos = likes.findIndex((like) => like.data().userId === session?.user?.uid);
       setHasLiked(false);
       if (likePos > -1) {
         setHasLiked(true);
@@ -108,7 +106,7 @@ export default function Post({
   );
 
   return (
-    <section className="bg-white my-7 border rounded-lg text-sm text-neutral-900">
+    <section className="bg-white my-7 border rounded-lg text-sm text-neutral-900 pb-4">
       <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}

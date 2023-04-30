@@ -14,7 +14,7 @@ export default function Footer() {
 
   return (
     <footer className="lg:hidden flex items-center w-full sticky bottom-0 justify-between px-14 border-t bg-white">
-      <Link href="/" className="navItem">
+      <Link href="/" className="navItem w-fit">
         <HomeIcon className="navBtn" />
       </Link>
       <MagnifyingGlassIcon className="navBtn" />
