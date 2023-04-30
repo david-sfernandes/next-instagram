@@ -25,7 +25,7 @@ export default function Stories() {
   return (
     <section
       className="flex gap-4 p-6 bg-white
-    mt-7 border-gray-200 border rounded-lg 
+    md:mt-7 border-gray-200 border rounded-lg 
     overflow-x-scroll scrollbar-thin 
     scrollbar-thumb-black"
     >

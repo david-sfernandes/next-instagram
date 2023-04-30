@@ -6,7 +6,7 @@ import {
   Bars3Icon,
   MapPinIcon,
   ChatBubbleOvalLeftEllipsisIcon,
-  ArrowRightOnRectangleIcon,
+  ArrowLeftOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { HomeIcon, PlayIcon } from "@heroicons/react/24/solid";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -40,7 +40,7 @@ export default function Header() {
         />
       </Link>
 
-      <div className="max-w-xs lg:hidden mt-[2px] ml-auto">
+      <div className="max-w-xs lg:hidden mt-[2px] mx-auto">
         <div className="relative rounded-md ">
           <div className="absolute inset-y-0 pl-3 flex items-center pointer-events-none">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
@@ -101,7 +101,7 @@ export default function Header() {
           </button>
         ) : (
           <button onClick={() => signIn()} className="navItem" title="Sign in">
-            <ArrowRightOnRectangleIcon className="navBtn" />
+            <ArrowLeftOnRectangleIcon className="navBtn" />
             <p className="hidden xl:block">Sign in</p>
           </button>
         )}

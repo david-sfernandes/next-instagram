@@ -9,15 +9,15 @@ export default function LikesCounter({
       Curtido por{" "}
       {hasLiked && <b>você</b>}{" "}
       {likesCounter > 0 && hasLiked && <>e </>}
-      {likesCounter > 0 && <OtherLikes likesCounter={likesCounter}/>}
+      {likesCounter > 0 && <OtherLikes likesCounter={likesCounter} hasLiked={hasLiked}/>}
     </p>
   );
 }
 
-function OtherLikes ({likesCounter}: {likesCounter: number}) {
+function OtherLikes ({likesCounter, hasLiked}: {likesCounter: number, hasLiked: boolean}) {
   return (
     <>
-      {likesCounter} {likesCounter == 1 ? <b>outra pessoa</b> : <b>outras pessoas</b>}
+      {likesCounter} {likesCounter == 1 ? <b>{hasLiked && "outra"} pessoa</b> : <b>{hasLiked && "outras"} pessoas</b>}
     </>
   )  
 

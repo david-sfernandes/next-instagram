@@ -1,4 +1,5 @@
 import {
+  ArrowLeftOnRectangleIcon,
   ChatBubbleOvalLeftEllipsisIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
@@ -13,27 +14,29 @@ export default function Footer() {
   const { data: session } = useSession();
 
   return (
-    <footer className="lg:hidden flex items-center w-full sticky bottom-0 justify-between px-14 border-t bg-white">
-      <Link href="/" className="navItem w-fit">
-        <HomeIcon className="navBtn" />
-      </Link>
-      <MagnifyingGlassIcon className="navBtn" />
-      <MapPinIcon className="navBtn" />
-      <PlayIcon className="navBtn" />
-      <ChatBubbleOvalLeftEllipsisIcon className="navBtn" />
-      <PlusCircleIcon className="navBtn" />
-      {session ? (
-        <Image
-          onClick={() => signOut()}
-          src={String(session?.user?.image)}
-          className="h-6 w-6 rounded-full"
-          height={50}
-          width={50}
-          alt="User avatar"
-        />
-      ) : (
-        <button onClick={() => signIn()}>Sign In</button>
-      )}
+    <footer className="lg:hidden w-full fixed 
+    bottom-0 px-5 py-2 border-t bg-white">
+      <nav className="max-w-sm mx-auto flex items-center justify-between ">
+        <Link href="/" className="">
+          <HomeIcon className="navBtn h-7 w-7" />
+        </Link>
+        <MapPinIcon className="navBtn h-7 w-7" />
+        <PlayIcon className="navBtn h-7 w-7" />
+        <PlusCircleIcon className="navBtn h-7 w-7" />
+        <ChatBubbleOvalLeftEllipsisIcon className="navBtn h-7 w-7" />
+        {session ? (
+          <Image
+            onClick={() => signOut()}
+            src={String(session?.user?.image)}
+            className="h-6 w-6 rounded-full"
+            height={50}
+            width={50}
+            alt="User avatar"
+          />
+        ) : (
+          <button onClick={() => signIn()}><ArrowLeftOnRectangleIcon className="navBtn h-7 w-7" /></button>
+        )}
+      </nav>
     </footer>
   );
 }

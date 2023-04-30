@@ -99,13 +99,13 @@ export default function Post({
   );
 
   return (
-    <section className="my-2 border-b border-zinc-300 text-sm text-neutral-900">
+    <section className="my-2 pb-2 border-b border-zinc-300 text-sm text-neutral-900">
       <div className="flex items-center py-2 px-3">
         {/* <div className="relative h-8 w-8 mr-3 border border-spacing-1 rounded-full"> */}
           <Image
             src={userImg}
             alt={username + " image"}
-            width={3}
+            width={32}
             height={32}
             className="profileImg w-8 h-8 mr-2 outline outline-1 
             outline-zinc-300 outline-offset-2"
