@@ -14,13 +14,15 @@ import { db, storage } from "../firebase";
 import { useSession } from "next-auth/react";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
+type FileResult = string | ArrayBuffer | null | undefined;
+
 export default function Modal() {
   const { data: session } = useSession();
   const [open, setOpen] = useRecoilState(modalState);
   const [loading, setLoading] = useState(false);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const filePickerRef = useRef(null);
-  const captionRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState<FileResult>(null);
+  const filePickerRef = useRef<null | HTMLInputElement>(null);
+  const captionRef = useRef<null | HTMLInputElement>(null);
 
   const uploadPost = async () => {
     if (loading) return;
@@ -109,14 +111,14 @@ export default function Modal() {
               <div className="mt-3 text-center sm:mt-5">
                 {selectedFile ? (
                   <img
-                    src={selectedFile}
+                    src={selectedFile.toString()}
                     className="w-full object-contain cursor-pointer"
                     onClick={() => setSelectedFile(null)}
                     alt=""
                   />
                 ) : (
                   <div
-                    onClick={() => filePickerRef.current.click()}
+                    onClick={() => filePickerRef.current?.click()}
                     className="mx-auto flex items-center justify-center h-12
                     w-12 rounded-full bg-red-100 cursor-pointer"
                   >

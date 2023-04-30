@@ -2,17 +2,6 @@ import { faker } from "@faker-js/faker";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-type SugestionProps = {
-  userId: string;
-  username: string;
-  email: string;
-  avatar: string;
-  password: string;
-  birthdate: Date;
-  registeredAt: Date;
-  company: any;
-};
-
 export default function Suggestions() {
   const [suggestions, setSuggestions] = useState<SugestionProps[]>([]);
 
@@ -60,14 +49,14 @@ export default function Suggestions() {
       ))}
       <ul className="text-sm text-gray-400 flex flex-wrap w-[320px] py-2">
         <li>Sobre</li>
-        <li className="before:content-['·'] before:p-1">Ajuda</li>
-        <li className="before:content-['·'] before:p-1">Imprensa</li>
-        <li className="before:content-['·'] before:p-1">API</li>
-        <li className="before:content-['·'] before:p-1">Carreiras</li>
-        <li className="before:content-['·'] before:p-1">Privacidade</li>
-        <li className="before:content-['·'] before:p-1">Termos</li>
-        <li className="before:content-['·'] before:p-1">Localizações</li>
-        <li className="before:content-['·'] before:p-1">Idioma</li>
+        <li className="footerMenuItem">Ajuda</li>
+        <li className="footerMenuItem">Imprensa</li>
+        <li className="footerMenuItem">API</li>
+        <li className="footerMenuItem">Carreiras</li>
+        <li className="footerMenuItem">Privacidade</li>
+        <li className="footerMenuItem">Termos</li>
+        <li className="footerMenuItem">Localizações</li>
+        <li className="footerMenuItem">Idioma</li>
       </ul>
       <p className="text-sm text-gray-400">
         2022 INSTAGRAM CLONE by{" "}

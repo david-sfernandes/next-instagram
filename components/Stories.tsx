@@ -4,11 +4,11 @@ import { faker } from "@faker-js/faker";
 import Story from "./Story";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
-type CS = { user: { username: string } };
-type NewSession = Session & CS;
+
 export default function Stories() {
   const [suggestions, setSuggestions] = useState<StoryProps[]>([]);
-  let { data: session } = useSession();
+  let { data: session }: CustomSession = useSession();
+
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
       userId: faker.datatype.uuid(),
@@ -24,7 +24,7 @@ export default function Stories() {
 
   return (
     <section
-      className="flex space-x-2 p-6 bg-white
+      className="flex gap-4 p-6 bg-white
     mt-7 border-gray-200 border rounded-lg 
     overflow-x-scroll scrollbar-thin 
     scrollbar-thumb-black"

@@ -7,7 +7,7 @@ import DocHead from './head'
 
 const Home: NextPage = () => {
   return (
-    <div className="bg-gray-50 h-screen overflow-y-scroll lg:pl-[245px]">
+    <div className="bg-white h-screen overflow-y-scroll lg:pl-[245px]">
       <DocHead />
       <Header />
       <Feed />

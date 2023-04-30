@@ -1,10 +1,9 @@
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
-import { Session } from "next-auth";
 
 export default function MiniProfile() {
-  const { data: session } = useSession();
-
+  const { data: session }: CustomSession = useSession();
+  
   return (
     <section
       className="flex items-center justify-between
@@ -19,7 +18,7 @@ export default function MiniProfile() {
           height={50}
         />
         <div className="flex-1 mx-4">
-          <h2 className="font-bold">{session.user?.username}</h2>
+          <h2 className="font-bold">{session?.user?.username}</h2>
           <h3 className="text-sm text-gray-400">Bem-vindo ao Instagram</h3>
         </div>
         <button onClick={() => signOut()} className="actionBtn text-sm">

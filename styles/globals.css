@@ -19,12 +19,16 @@
   }
 
   .actionBtn {
-    @apply font-semibold text-blue-400;
+    @apply font-semibold text-blue-400 disabled:text-transparent;
   }
 
   .profileImg {
-    @apply rounded-full border p-[2px] object-cover 
-    cursor-pointer transform 
+    @apply rounded-full  
+    object-cover cursor-pointer transform 
     transition duration-200 ease-out;
+  }
+
+  .footerMenuItem {
+    @apply before:content-['·'] before:p-1;
   }
 }

@@ -24,14 +24,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import Moment from "react-moment";
-
-type PostProps = {
-  id: string;
-  username: string;
-  userImg: string;
-  img: string;
-  caption: string;
-};
+import LikesCounter from "./LikesCounter";
 
 export default function Post({
   id,
@@ -40,7 +33,7 @@ export default function Post({
   img,
   caption,
 }: PostProps) {
-  const { data: session } = useSession();
+  const { data: session }: CustomSession = useSession();
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<
     QueryDocumentSnapshot<DocumentData>[]
@@ -61,7 +54,7 @@ export default function Post({
     [db, id]
   );
 
-  const sendComment = async (e) => {
+  const sendComment = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: comment,
@@ -106,15 +99,18 @@ export default function Post({
   );
 
   return (
-    <section className="bg-white my-7 border rounded-lg text-sm text-neutral-900 pb-4">
+    <section className="my-2 border-b border-zinc-300 text-sm text-neutral-900">
       <div className="flex items-center py-2 px-3">
-        <Image
-          src={userImg}
-          alt={username + " image"}
-          height="32"
-          width="32"
-          className="profileImg h-8 mr-3"
-        />
+        {/* <div className="relative h-8 w-8 mr-3 border border-spacing-1 rounded-full"> */}
+          <Image
+            src={userImg}
+            alt={username + " image"}
+            width={3}
+            height={32}
+            className="profileImg w-8 h-8 mr-2 outline outline-1 
+            outline-zinc-300 outline-offset-2"
+          />
+        {/* </div> */}
         <p className="flex-1 font-bold">{username}</p>
         <EllipsisHorizontalIcon className="postBtn" />
       </div>
@@ -135,9 +131,9 @@ export default function Post({
         <PaperAirplaneIcon className="postBtn -rotate-45" />
         <BookmarkIcon className="postBtn ml-auto" />
       </div>
-      <div className="px-4 truncate">
+      <div className="px-4">
         {!!likes.length && (
-          <p className="mb-1">Curtido por {hasLiked && (<><b>você</b> e</>) } {likes.length - hasLiked} <b>outras pessoas</b></p>
+          <LikesCounter likesLength={likes.length} hasLiked={hasLiked}/>
         )}
         <span className="font-bold mr-1">{username}</span>
         {caption}
@@ -146,22 +142,19 @@ export default function Post({
       <div>
         {!!comments.length && (
           <div
-            className="p-4 h-20 overflow-y-scroll scrollbar-thumb-black 
+            className="px-4 overflow-y-scroll scrollbar-thumb-black 
           scrollbar-thin"
           >
             {comments.map((comment) => (
               <div
                 key={comment.id}
-                className="flex items-center space-x-2 mb-3"
+                className="flex items-center space-x-2 mt-3"
               >
                 <p className="text-sm flex-1">
                   <span className="font-bold ">{comment.data().username}</span>
                   {" "}
                   {comment.data().comment}
                 </p>
-                <Moment fromNow className="pr-5 text-xs">
-                  {comment.data().timestamp.toDate()}
-                </Moment>
               </div>
             ))}
           </div>
@@ -175,9 +168,10 @@ export default function Post({
               className="border-none flex-1 focus:ring-0 outline-none text-sm"
             />
             <button
-              disabled={!!comment.trim()}
+              disabled={comment.trim() == ""}
               type="submit"
               className="actionBtn"
+              onClick={(e) => sendComment(e)}
             >
               Post
             </button>
