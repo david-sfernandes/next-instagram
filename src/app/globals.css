@@ -4,8 +4,8 @@
 
 @layer components {
   .navBtn {
-    @apply h-6 w-6 cursor-pointer transform 
-    transition-all duration-150 ease-out 
+    @apply h-7 w-7 cursor-pointer transform 
+    transition-all duration-150 ease-out
     group-hover:scale-125 text-neutral-800;
   }
 
@@ -30,5 +30,25 @@
 
   .footerMenuItem {
     @apply before:content-['·'] before:p-1;
+  }
+
+  .nav-sm-view {
+    @apply absolute border border-t-zinc-300 bottom-0 left-0 w-screen;
+  }
+
+  .nav-md-view {
+    @apply absolute border border-l-zinc-300 inset-y-0 w-fit h-screen;
+  }
+  
+  .nav-lg-view {
+    @apply hidden md:flex;
+  }
+
+  .nav-sm-content {
+    @apply flex justify-evenly;
+  }
+
+  .nav-md-content {
+    @apply flex flex-col justify-evenly;
   }
 }
