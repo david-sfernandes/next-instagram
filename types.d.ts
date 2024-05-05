@@ -32,4 +32,13 @@ type SugestionProps = {
 type LikesCounterProps = {
   hasLiked: boolean;
   likesLength: number;
+};
+
+type LayoutProps = Readonly<{
+  children: React.ReactNode;
+}>;
+
+interface StateStore {
+  open: boolean;
+  setOpen: (isOpen: boolean) => void;
 }

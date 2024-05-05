@@ -46,7 +46,7 @@
     @apply font-semibold text-blue-400 disabled:text-transparent;
   }
 
-  .profile-img {
+  .profile-img  {
     @apply rounded-full object-cover cursor-pointer transform transition duration-200 ease-out;
   }
 

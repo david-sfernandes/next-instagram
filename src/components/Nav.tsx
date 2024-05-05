@@ -1,6 +1,5 @@
-"use client";
+import { auth } from "@/auth";
 import {
-  ArrowLeftEndOnRectangleIcon,
   Bars3Icon,
   ChatBubbleOvalLeftEllipsisIcon,
   HeartIcon,
@@ -9,13 +8,12 @@ import {
   PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 import { HomeIcon, PlayIcon } from "@heroicons/react/24/solid";
-import { signIn, signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import ProfileItem from "./ProfileItem";
 
-export default function Header() {
-  // const { data: session } = useSession();
-  const session = { user: { image: "https://links.papareact.com/3ke" } };
+export default async function Header() {
+  const session = await auth();
 
   return (
     <>
@@ -48,49 +46,27 @@ export default function Header() {
             <MagnifyingGlassIcon className="nav-icon m-3" />
             <p className="nav-text">Pesquisa</p>
           </div>
-
           <div className="nav-item">
             <MapPinIcon className="nav-icon m-3" />
             <p className="nav-text">Explorar</p>
           </div>
-
           <div className="nav-item">
             <PlayIcon className="nav-icon m-3" />
             <p className="nav-text">Reels</p>
           </div>
-
           <div className="nav-item">
             <ChatBubbleOvalLeftEllipsisIcon className="nav-icon m-3" />
             <p className="nav-text">Mensagens</p>
           </div>
-
           <div className="hidden md:nav-item">
             <HeartIcon className="nav-icon m-3" />
             <p className="nav-text">Notificações</p>
           </div>
-
           <div className="nav-item">
             <PlusCircleIcon className="nav-icon m-3" />
             <p className="nav-text">Criar</p>
           </div>
-
-          {session ? (
-            <div className="nav-item">
-              <Image
-                onClick={() => signOut()}
-                src={String(session?.user?.image)}
-                className="h-7 w-7 rounded-full m-3"
-                height={50}
-                width={50}
-                alt="User avatar"
-              />
-              <p className="nav-text">Perfil</p>
-            </div>
-          ) : (
-            <button onClick={() => signIn()}>
-              <ArrowLeftEndOnRectangleIcon className="nav-icon m-3 h-7 w-7" />
-            </button>
-          )}
+          {session && <ProfileItem session={session} />}`
         </div>
         <div className="hidden md:nav-md-content md:px-2 justify-end mt-auto">
           <div className="nav-item mb-5">

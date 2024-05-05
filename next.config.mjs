@@ -6,7 +6,8 @@ const nextConfig = {
       'cloudflare-ipfs.com',
       'i.kym-cdn.com',
       'lh3.googleusercontent.com',
-      'firebasestorage.googleapis.com'
+      'firebasestorage.googleapis.com',
+      'avatars.githubusercontent.com'
     ],
   },
 };

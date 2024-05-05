@@ -1,3 +1,5 @@
+"use client";
+import { db } from "@/firebase";
 import {
   BookmarkIcon,
   ChatBubbleBottomCenterIcon,
@@ -21,11 +23,11 @@ import {
   QuerySnapshot,
   serverTimestamp,
 } from "firebase/firestore";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { db } from "@/firebase";
 import LikesCounter from "./LikesCounter";
+
+type PostWithSession = PostProps & { session: CustomSession };
 
 export default function Post({
   id,
@@ -33,8 +35,8 @@ export default function Post({
   userImg,
   img,
   caption,
-}: PostProps) {
-  const { data: session }: CustomSession = useSession();
+  session,
+}: PostWithSession) {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<
     QueryDocumentSnapshot<DocumentData>[]
@@ -69,7 +71,7 @@ export default function Post({
     } else {
       await addDoc(collection(db, `posts/${id}/likes`), {
         username: (session as CustomSession).user.username,
-        userId: session?.user?.uid,
+        userId: session?.user?.id,
       });
     }
   };
@@ -93,7 +95,7 @@ export default function Post({
 
   const verifyUserLike = () => {
     let likePos = likes.findIndex(
-      (like) => like.data().userId === session?.user?.uid
+      (like) => like.data().userId === session?.user?.id
     );
     setHasLiked(false);
     if (likePos > -1) {
@@ -110,11 +112,11 @@ export default function Post({
           alt={username + " image"}
           width={32}
           height={32}
-          className="profileImg w-8 h-8 mr-2 outline outline-1 
+          className="profile-img w-8 h-8 mr-2 outline outline-1 
             outline-zinc-300 outline-offset-2"
         />
         <p className="flex-1 font-bold">{username}</p>
-        <EllipsisHorizontalIcon className="postBtn" />
+        <EllipsisHorizontalIcon className="post-btn" />
       </div>
       <Image
         className="object-cover w-full"
@@ -125,13 +127,13 @@ export default function Post({
       />
       <div className="flex gap-4 p-4">
         {hasLiked ? (
-          <SolidHeartIcon onClick={likePost} className="postBtn text-red-500" />
+          <SolidHeartIcon onClick={likePost} className="post-btn text-red-500" />
         ) : (
-          <HeartIcon onClick={likePost} className="postBtn" />
+          <HeartIcon onClick={likePost} className="post-btn" />
         )}
-        <ChatBubbleBottomCenterIcon className="postBtn" />
-        <PaperAirplaneIcon className="postBtn -rotate-45" />
-        <BookmarkIcon className="postBtn ml-auto" />
+        <ChatBubbleBottomCenterIcon className="post-btn" />
+        <PaperAirplaneIcon className="post-btn -rotate-45" />
+        <BookmarkIcon className="post-btn ml-auto" />
       </div>
       <div className="px-4">
         {!!likes.length && (
@@ -171,7 +173,7 @@ export default function Post({
             <button
               disabled={comment.trim() == ""}
               type="submit"
-              className="actionBtn"
+              className="action-btn"
               onClick={(e) => sendComment(e)}
             >
               Post
