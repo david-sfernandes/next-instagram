@@ -1,16 +1,6 @@
 "use client";
+import { HeartIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import {
-  MagnifyingGlassIcon,
-  PlusCircleIcon,
-  HeartIcon,
-  Bars3Icon,
-  MapPinIcon,
-  ChatBubbleOvalLeftEllipsisIcon,
-  ArrowLeftEndOnRectangleIcon,
-} from "@heroicons/react/24/outline";
-import { HomeIcon, PlayIcon } from "@heroicons/react/24/solid";
-import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 
 export default function Header() {
@@ -33,7 +23,7 @@ export default function Header() {
             width={28}
           />
         </Link>
-        <div className="flex items-center">
+        <div className="flex items-center max-w-[268px]">
           <div className="flex rounded-md mx-auto px-4 py-2 bg-gray-100">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
             <input
@@ -43,7 +33,7 @@ export default function Header() {
               placeholder="Search..."
             />
           </div>
-          <HeartIcon className="navBtn ml-5 w-7 h-7" />
+          <HeartIcon className="nav-icon ml-5 w-7 h-7" />
         </div>
       </div>
     </header>
