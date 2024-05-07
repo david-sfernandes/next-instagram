@@ -43,7 +43,7 @@
   }
 
   .action-btn {
-    @apply font-semibold text-blue-400 disabled:text-transparent;
+    @apply font-semibold text-blue-400 text-xs disabled:text-transparent;
   }
 
   .profile-img  {
@@ -51,6 +51,6 @@
   }
 
   .footer-menu-item {
-    @apply before:content-['·'] before:p-1;
+    @apply before:content-['·'] before:p-1 text-xs;
   }
 }

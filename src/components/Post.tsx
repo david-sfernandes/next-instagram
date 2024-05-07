@@ -105,7 +105,7 @@ export default function Post({
   };
 
   return (
-    <section className="my-2 pb-2 border-b border-zinc-300 text-sm text-neutral-900">
+    <article className="my-2 pb-2 border-b border-zinc-300 text-sm text-neutral-900 max-w-[470px]">
       <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}
@@ -181,6 +181,6 @@ export default function Post({
           </form>
         )}
       </div>
-    </section>
+    </article>
   );
 }

@@ -5,7 +5,7 @@ import Modal from "@/components/Modal";
 export default async function Page() {
   const session = await auth();
   return (
-    <main>
+    <main className="flex">
       <Feed />
       {/* {session && <Modal session={session}/>} */}
     </main>

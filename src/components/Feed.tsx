@@ -9,10 +9,9 @@ export default async function Feed() {
 
   return (
     <div
-      className={`lg:w-[820px] grid lg:grid-cols-[470px_1fr] mx-auto 
-      ${!session && "!grid-cols-1 !max-w-3xl"}`}
+      className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full px-1`}
     >
-      <section className="w-[470px] max-w-[98vw] mx-auto">
+      <section className="w-full max-w-[630px] mx-auto">
         {session && (
           <>
             <Stories session={session} />
@@ -21,7 +20,7 @@ export default async function Feed() {
         )}
       </section>
       {session && (
-        <section className="hidden lg:inline-grid justify-items-end">
+        <section className="hidden xl:inline-grid w-[383px] pl-16 justify-items-end">
           <div className="fixed">
             <MiniProfile />
             <Suggestions />

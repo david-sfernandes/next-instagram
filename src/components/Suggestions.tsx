@@ -22,9 +22,9 @@ export default function Suggestions() {
   }, []);
 
   return (
-    <section className="w-full">
+    <section className="w-full px-4">
       <div className="flex justify-between text-sm mb-5 max-w-full">
-        <h3 className="text-sm font-bold text-gray-400">Sugestões para vocÊ</h3>
+        <h3 className="text-xs font-bold text-gray-400">Sugestões para você</h3>
         <button className="text-gray-600 font-semibold">Ver tudo</button>
       </div>
       {suggestions.map((suggestion) => (
@@ -33,7 +33,7 @@ export default function Suggestions() {
           className="flex items-center justify-between mt-3 gap-2"
         >
           <Image
-            className="profile-img w-10 h-10"
+            className="profile-img w-11 h-11"
             src={suggestion.avatar}
             width={40}
             height={40}
@@ -48,18 +48,19 @@ export default function Suggestions() {
           <button className="action-btn text-sm">Seguir</button>
         </div>
       ))}
-      <ul className="text-sm text-gray-400 flex flex-wrap w-[320px] py-2">
-        <li>Sobre</li>
-        <li className="footerMenuItem">Ajuda</li>
-        <li className="footerMenuItem">Imprensa</li>
-        <li className="footerMenuItem">API</li>
-        <li className="footerMenuItem">Carreiras</li>
-        <li className="footerMenuItem">Privacidade</li>
-        <li className="footerMenuItem">Termos</li>
-        <li className="footerMenuItem">Localizações</li>
-        <li className="footerMenuItem">Idioma</li>
+      <ul className="text-sm text-gray-400 flex flex-wrap w-[320px] py-2 mt-9">
+        <li className="text-xs">Sobre</li>
+        <li className="footer-menu-item">Ajuda</li>
+        <li className="footer-menu-item">Imprensa</li>
+        <li className="footer-menu-item">API</li>
+        <li className="footer-menu-item">Carreiras</li>
+        <li className="footer-menu-item">Privacidade</li>
+        <li className="footer-menu-item">Termos</li>
+        <li className="footer-menu-item">Localizações</li>
+        <li className="footer-menu-item">Idioma</li>
+        <li className="footer-menu-item">Meta Verified</li>
       </ul>
-      <p className="text-sm text-gray-400">
+      <p className="text-xs text-gray-400 mt-3">
         2022 INSTAGRAM CLONE by{" "}
         <a href="https://github.com/david-sfernandes" className="underline">
           David S.

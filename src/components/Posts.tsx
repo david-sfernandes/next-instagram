@@ -25,7 +25,7 @@ export default function Posts({ session }: { session: Session }) {
   );
 
   return (
-    <main>
+    <section className="flex flex-col items-center">
       {posts.map((post) => (
         <Post
           key={post.id}
@@ -37,6 +37,6 @@ export default function Posts({ session }: { session: Session }) {
           session={session}
         />
       ))}
-    </main>
+    </section>
   );
 }
