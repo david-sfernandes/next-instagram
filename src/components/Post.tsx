@@ -5,6 +5,7 @@ import {
   ChatBubbleBottomCenterIcon,
   HeartIcon,
   PaperAirplaneIcon,
+  FaceSmileIcon
 } from "@heroicons/react/24/outline";
 import {
   EllipsisHorizontalIcon,
@@ -119,13 +120,13 @@ export default function Post({
         <EllipsisHorizontalIcon className="post-btn" />
       </div>
       <Image
-        className="object-cover w-full"
+        className="object-cover w-full rounded"
         src={img}
         width={800}
         height={800}
         alt="Post image"
       />
-      <div className="flex gap-4 p-4">
+      <div className="flex gap-3 py-3">
         {hasLiked ? (
           <SolidHeartIcon onClick={likePost} className="post-btn text-red-500" />
         ) : (
@@ -135,7 +136,7 @@ export default function Post({
         <PaperAirplaneIcon className="post-btn -rotate-45" />
         <BookmarkIcon className="post-btn ml-auto" />
       </div>
-      <div className="px-4">
+      <div className="">
         {!!likes.length && (
           <LikesCounter likesLength={likes.length} hasLiked={hasLiked} />
         )}
@@ -146,7 +147,7 @@ export default function Post({
       <div>
         {!!comments.length && (
           <div
-            className="px-4 overflow-y-scroll scrollbar-thumb-black 
+            className="overflow-y-scroll scrollbar-thumb-black 
           scrollbar-thin"
           >
             {comments.map((comment) => (
@@ -163,12 +164,14 @@ export default function Post({
           </div>
         )}
         {session && (
-          <form className="flex items-center p-4" onSubmit={sendComment}>
+          <form className="flex items-center pb-4 pt-1" onSubmit={sendComment}>
             <input
               type="text"
               onChange={(e) => setComment(e.target.value)}
-              placeholder="Add a comment..."
-              className="border-none flex-1 focus:ring-0 outline-none text-sm"
+              placeholder="Adicione um comentário..."
+              className="border-none flex-1 focus:ring-0 outline-none text-sm p-0"
+              // submit on press enter button
+
             />
             <button
               disabled={comment.trim() == ""}
@@ -176,8 +179,9 @@ export default function Post({
               className="action-btn"
               onClick={(e) => sendComment(e)}
             >
-              Post
+              Publicar
             </button>
+            <FaceSmileIcon className="h-4 w-4 text-gray-600 ml-2" />
           </form>
         )}
       </div>

@@ -16,7 +16,7 @@ export default async function Header() {
   const session = await auth();
 
   return (
-    <nav className="nav-sm-view md:nav-md-view min-w-0 xl:min-w-[245px]">
+    <nav className="nav-sm-view md:nav-md-view min-w-0 xl:min-w-[245px] bg-white z-10">
       <div className="nav-sm-content md:nav-md-content md:px-2">
         <Link
           href="/"
@@ -65,7 +65,7 @@ export default async function Header() {
           <PlusCircleIcon className="nav-icon m-3" />
           <p className="nav-text">Criar</p>
         </div>
-        {session && <ProfileItem session={session} />}`
+        {session && <ProfileItem session={session} />}
       </div>
       <div className="hidden md:nav-md-content md:px-2 justify-end mt-auto">
         <div className="nav-item mb-5">

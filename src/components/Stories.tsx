@@ -22,9 +22,8 @@ export default function Stories({ session }: { session: Session }) {
 
   return (
     <section
-      className="flex gap-4 p-6 bg-white
-    md:mt-7 border-gray-200 border rounded-lg 
-    overflow-x-scroll scrollbar-thin 
+      className="flex gap-5 p-2 bg-white md:mt-7
+      rounded-lg overflow-x-scroll scrollbar-thin 
     scrollbar-thumb-black"
     >
       {session && (

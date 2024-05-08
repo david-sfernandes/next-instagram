@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="absolute md:hidden top-0 left-0 right-0 h-[60px] border border-b-zinc-300">
+    <header className="fixed md:hidden top-0 left-0 right-0 h-[60px] border border-b-zinc-300 z-10 bg-white">
       <div className="flex h-full w-full px-4 items-center justify-between">
         <Link href="/" className="relative h-7">
           <Image
@@ -23,13 +23,13 @@ export default function Header() {
             width={28}
           />
         </Link>
-        <div className="flex items-center max-w-[268px]">
-          <div className="flex rounded-md mx-auto px-4 py-2 bg-gray-100">
+        <div className="flex items-center max-w-[268px] h-9">
+          <div className="flex rounded-lg mx-auto px-4 py-1 bg-zinc-100 items-center">
             <MagnifyingGlassIcon className="h-5 w-5 text-gray-500" />
             <input
               type="text"
               className="outline-none block w-full pl-2 sm:text-sm 
-              border-0 focus:ring-black rounded-md bg-transparent"
+              border-0 focus:ring-black rounded-md bg-transparent py-0"
               placeholder="Search..."
             />
           </div>

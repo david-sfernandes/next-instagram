@@ -11,7 +11,7 @@ export default async function Feed() {
     <div
       className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full px-1`}
     >
-      <section className="w-full max-w-[630px] mx-auto">
+      <section className="w-full max-w-[630px] mx-auto pt-16 md:pt-0">
         {session && (
           <>
             <Stories session={session} />

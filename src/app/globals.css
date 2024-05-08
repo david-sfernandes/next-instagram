@@ -9,7 +9,7 @@
   }
 
   .nav-item {
-    @apply flex space-x-1 hover:bg-zinc-200 w-full rounded text-neutral-800 text-base items-center;
+    @apply flex space-x-1 hover:bg-zinc-200 w-full rounded text-neutral-800 text-base items-center justify-center xl:justify-start;
   }
 
   .nav-text {
@@ -17,11 +17,11 @@
   }
 
   .nav-sm-view {
-    @apply absolute border border-t-zinc-300 bottom-0 left-0 w-screen;
+    @apply fixed border border-t-zinc-300 bottom-0 left-0 w-screen;
   }
 
   .nav-md-view {
-    @apply absolute flex flex-col border border-l-zinc-300 inset-y-0 w-fit h-screen;
+    @apply fixed flex flex-col border border-l-zinc-300 inset-y-0 w-fit h-screen;
   }
 
   .nav-lg-view {
@@ -29,7 +29,7 @@
   }
 
   .nav-sm-content {
-    @apply flex justify-evenly;
+    @apply flex justify-around;
   }
 
   .nav-md-content {
@@ -39,7 +39,7 @@
   /*Posts*/
 
   .post-btn {
-    @apply h-7 hover:scale-125 cursor-pointer transition-all duration-150 ease-out;
+    @apply h-7 hover:text-gray-500 cursor-pointer transition-all duration-150 ease-out;
   }
 
   .action-btn {
