@@ -9,15 +9,11 @@ export default async function Feed() {
 
   return (
     <div
-      className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full px-1`}
+      className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full md:px-1`}
     >
-      <section className="w-full max-w-[630px] mx-auto pt-16 md:pt-0">
-        {session && (
-          <>
-            <Stories session={session} />
-            <Posts session={session} />
-          </>
-        )}
+      <section className="w-full max-w-[630px] mx-auto py-16 md:py-0">
+        <Stories session={session} />
+        <Posts session={session} />
       </section>
       {session && (
         <section className="hidden xl:inline-grid w-[383px] pl-16 justify-items-end">

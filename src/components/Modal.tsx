@@ -1,7 +1,13 @@
 "use client";
-import { auth } from "@/auth";
 import useStateStore from "@/store/state";
-import { Dialog, Transition } from "@headlessui/react";
+import {
+  Button,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 import { CameraIcon } from "@heroicons/react/24/solid";
 import {
   addDoc,
@@ -12,7 +18,7 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { Session } from "next-auth";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { db, storage } from "../firebase";
 
 type FileResult = string | ArrayBuffer | null | undefined;
@@ -31,7 +37,7 @@ export default function Modal({ session }: { session: Session }) {
     console.log(collection(db, "posts"));
 
     const docRef = await addDoc(collection(db, "posts"), {
-      username: (session as CustomSession).user.username,
+      username: session.user?.name,
       caption: captionRef.current?.value,
       profileImg: session?.user?.image,
       timestamp: serverTimestamp(),
@@ -62,110 +68,77 @@ export default function Modal({ session }: { session: Session }) {
   };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog
-        as="div"
-        className="fixed z-10 inset-0 overflow-y-auto"
-        onClose={setOpen}
-      >
-        <div
-          className="flex items-end justify-center
-        min-h-[800px] sm:min-h-screen p-4 pb-20
-        text-center sm:block sm:p-0"
+    <>
+      <Transition appear show={open}>
+        <Dialog
+          as="div"
+          className="relative z-10 focus:outline-none"
+          onClose={setOpen}
         >
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-          <span
-            aria-hidden="true"
-            className="hidden sm:inline-block sm:align-middle
-            sm:h-screen"
-          >
-            &#8203;
-          </span>
-
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
-            <div
-              className="inline-block align-bottom bg-white rounded-lg
-              p-4 text-left overflow-hidden shadow-lg transform
-              transition-all sm:my-0 sm:align-middle sm:max-w-sm
-              sm:w-full sm:p-6"
-            >
-              <div className="mt-3 text-center sm:mt-5">
-                {selectedFile ? (
-                  <img
-                    src={selectedFile.toString()}
-                    className="w-full object-contain cursor-pointer"
-                    onClick={() => setSelectedFile(null)}
-                    alt=""
-                  />
-                ) : (
-                  <div
-                    onClick={() => filePickerRef.current?.click()}
-                    className="mx-auto flex items-center justify-center h-12
-                    w-12 rounded-full bg-red-100 cursor-pointer"
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-zinc-800/70">
+            <div className="flex min-h-full items-center justify-center">
+              <TransitionChild
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 transform-[scale(95%)]"
+                enterTo="opacity-100 transform-[scale(100%)]"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 transform-[scale(100%)]"
+                leaveTo="opacity-0 transform-[scale(95%)]"
+              >
+                <DialogPanel className="w-full max-w-md rounded-xl bg-dark flex flex-col gap-3 justify-center items-center">
+                  <DialogTitle
+                    as="h3"
+                    className="text-base/7 font-medium text-color-darker text-center border-b border-gray-500/10 p-1 w-full pb-3"
                   >
-                    <CameraIcon
-                      className="h-6 w-6 text-red-600"
-                      aria-hidden="true"
+                    Crie uma nova publicação
+                  </DialogTitle>
+                  {selectedFile ? (
+                    <img
+                      src={selectedFile.toString()}
+                      className="w-full object-contain cursor-pointer"
+                      onClick={() => setSelectedFile(null)}
+                      alt=""
                     />
-                  </div>
-                )}
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg leading-6 font-medium text-gray-600"
-                >
-                  Upload a photo
-                </Dialog.Title>
-                <div>
-                  <input
-                    ref={filePickerRef}
-                    type="file"
-                    hidden
-                    onChange={addImageToPost}
-                  />
+                  ) : (
+                    <div
+                      onClick={() => filePickerRef.current?.click()}
+                      className="flex flex-col py-2 items-center justify-center cursor-pointer"
+                    >
+                      <input
+                        ref={filePickerRef}
+                        type="file"
+                        hidden
+                        onChange={addImageToPost}
+                      />
+                      <CameraIcon className="h-9 w-9 text text-color-darker mt-4" />
+                      <p className="mt-2 text-color-darker">
+                        Arraste as fotos e os vídeos aqui
+                      </p>
+                    </div>
+                  )}
                   <input
                     type="text"
-                    className="border-none focus:ring-0 w-full text-center mt-2"
-                    placeholder="Please enter a caption"
+                    className="border-none focus:ring-0 w-11/12 text-center my-2 bg-gray-500/5 text-color-dark border-b border-gray-400/50 p-1"
+                    placeholder="Digite uma legenda..."
                     ref={captionRef}
                   />
-                </div>
-                <div className="mt-5 sm:mt-6">
-                  <button
-                    onClick={uploadPost}
-                    disabled={!selectedFile || loading}
-                    type="button"
-                    className="inline-flex justify-center w-full rounded-md
-                      border border-transparent shadow-md px-4 py-2 bg-red-600
-                      text-base font-medium text-white hover:bg-red-700
-                      focus:outline-none focus:ring-2 focus:ring-offset-2 
-                      sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed"
-                  >
-                    {loading ? "Uploading..." : "Upload Post"}
-                  </button>
-                </div>
-              </div>
+                  <div className="">
+                    <Button
+                      onClick={uploadPost}
+                      disabled={!selectedFile || loading}
+                      className="
+                      inline-flex items-center rounded-md bg-blue-500 py-1.5 px-3 text-sm/6 text-white focus:bg-blue-600/95 data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white mb-6
+                      focus:ring-2 focus:ring-offset-2 sm:text-sm disabled:bg-gray-300 disabled:cursor-not-allowed"
+                    >
+                      {loading ? "Publicando..." : "Publicar"}
+                    </Button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
             </div>
-          </Transition.Child>
-        </div>
-      </Dialog>
-    </Transition.Root>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import Story from "./Story";
 
-export default function Stories({ session }: { session: Session }) {
+export default function Stories({ session }: { session: Session | null }) {
   const [suggestions, setSuggestions] = useState<StoryProps[]>([]);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Stories({ session }: { session: Session }) {
 
   return (
     <section
-      className="flex gap-5 p-2 bg-white md:mt-7
+      className="flex gap-5 p-2 bg-lighter md:mt-7
       rounded-lg overflow-x-scroll scrollbar-thin 
     scrollbar-thumb-black"
     >

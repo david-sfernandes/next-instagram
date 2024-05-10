@@ -6,9 +6,7 @@ export default async function MiniProfile() {
   const session = await auth();
 
   return (
-    <section
-      className="flex items-center justify-between mt-14 mb-2 px-4"
-    >
+    <section className="flex items-center justify-between mt-14 mb-2 px-4">
       <>
         <Image
           src={String(session?.user?.image)}
@@ -19,7 +17,7 @@ export default async function MiniProfile() {
         />
         <div className="flex-1 mx-4">
           <h2 className="font-bold">{session?.user?.name}</h2>
-          <h3 className="text-sm text-gray-400">Bem-vindo</h3>
+          <h3 className="text-sm text-color-dark">Bem-vindo</h3>
         </div>
         <SignOut />
       </>

@@ -5,6 +5,8 @@ const useStateStore = create<StateStore>()(
   persist(
     (set, get) => ({
       open: false,
+      isLightTheme: true,
+      setLightTheme: (isLightTheme: boolean) => set({ isLightTheme: isLightTheme }),
       setOpen: (isOpen: boolean) => set({ open: isOpen }),
     }),
     {

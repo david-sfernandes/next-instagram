@@ -5,7 +5,7 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProfileItem({ session }: { session: Session }) {
+export default function ProfileItem({ session }: { session: Session | null}) {
   if (!session) {
     return (
       <Link href={"/signin"} className="nav-item">

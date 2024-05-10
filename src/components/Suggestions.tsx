@@ -24,7 +24,9 @@ export default function Suggestions() {
   return (
     <section className="w-full px-4">
       <div className="flex justify-between text-sm mb-5 max-w-full">
-        <h3 className="text-xs font-bold text-gray-400">Sugestões para você</h3>
+        <h3 className="text-xs font-bold text-color-lighter">
+          Sugestões para você
+        </h3>
         <button className="text-gray-600 font-semibold">Ver tudo</button>
       </div>
       {suggestions.map((suggestion) => (
@@ -48,7 +50,7 @@ export default function Suggestions() {
           <button className="action-btn text-sm">Seguir</button>
         </div>
       ))}
-      <ul className="text-sm text-gray-400 flex flex-wrap w-[320px] py-2 mt-9">
+      <ul className="text-xs flex flex-wrap w-[320px] py-2 mt-9 text-color-lighter">
         <li className="text-xs">Sobre</li>
         <li className="footer-menu-item">Ajuda</li>
         <li className="footer-menu-item">Imprensa</li>
@@ -60,8 +62,8 @@ export default function Suggestions() {
         <li className="footer-menu-item">Idioma</li>
         <li className="footer-menu-item">Meta Verified</li>
       </ul>
-      <p className="text-xs text-gray-400 mt-3">
-        2022 INSTAGRAM CLONE by{" "}
+      <p className="text-xs text-color-lighter mt-3">
+        © 2024 Instagram Clone by{" "}
         <a href="https://github.com/david-sfernandes" className="underline">
           David S.
         </a>

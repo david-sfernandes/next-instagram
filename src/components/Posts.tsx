@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Post from "./Post";
 
-export default function Posts({ session }: { session: Session }) {
+export default function Posts({ session }: { session: Session | null}) {
   const [posts, setPosts] = useState<DocumentData[]>([]);
   console.log(posts);
   

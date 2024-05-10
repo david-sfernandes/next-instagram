@@ -67,6 +67,7 @@ export default function Post({
   };
 
   const likePost = async () => {
+    if (!session) return;
     if (hasLiked) {
       await deleteDoc(doc(db, `posts/${id}/likes/${likeIndex}`));
     } else {
@@ -95,6 +96,7 @@ export default function Post({
   };
 
   const verifyUserLike = () => {
+    if (!session) return;
     let likePos = likes.findIndex(
       (like) => like.data().userId === session?.user?.id
     );
@@ -106,7 +108,7 @@ export default function Post({
   };
 
   return (
-    <article className="my-2 pb-2 border-b border-zinc-300 text-sm text-neutral-900 max-w-[470px]">
+    <article className="my-2 pb-2 border-b border-zinc-300 dark:border-zinc-800 text-sm max-w-[470px] text-color-darker">
       <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}
@@ -120,15 +122,18 @@ export default function Post({
         <EllipsisHorizontalIcon className="post-btn" />
       </div>
       <Image
-        className="object-cover w-full rounded"
+        className="object-cover w-full md:rounded"
         src={img}
         width={800}
         height={800}
         alt="Post image"
       />
-      <div className="flex gap-3 py-3">
+      <div className="flex gap-3 py-3 px-4 md:px-0">
         {hasLiked ? (
-          <SolidHeartIcon onClick={likePost} className="post-btn text-red-500" />
+          <SolidHeartIcon
+            onClick={likePost}
+            className="post-btn text-red-500"
+          />
         ) : (
           <HeartIcon onClick={likePost} className="post-btn" />
         )}
@@ -136,15 +141,17 @@ export default function Post({
         <PaperAirplaneIcon className="post-btn -rotate-45" />
         <BookmarkIcon className="post-btn ml-auto" />
       </div>
-      <div className="">
+      <div className="px-4 md:px-0">
         {!!likes.length && (
           <LikesCounter likesLength={likes.length} hasLiked={hasLiked} />
         )}
-        <span className="font-bold mr-1">{username}</span>
-        {caption}
+        <p className="w-full">
+          <span className="font-bold mr-1">{username}</span>
+          {caption}
+        </p>
       </div>
 
-      <div>
+      <div className="px-4 md:px-0">
         {!!comments.length && (
           <div
             className="overflow-y-scroll scrollbar-thumb-black 
@@ -169,19 +176,18 @@ export default function Post({
               type="text"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Adicione um comentário..."
-              className="border-none flex-1 focus:ring-0 outline-none text-sm p-0"
+              className="border-none flex-1 focus:ring-0 outline-none text-sm p-0 bg-transparent dark:placeholder:text-zinc-400/80"
               // submit on press enter button
-
             />
             <button
-              disabled={comment.trim() == ""}
+              disabled={comment.trim() == "" || session == null}
               type="submit"
               className="action-btn"
               onClick={(e) => sendComment(e)}
             >
               Publicar
             </button>
-            <FaceSmileIcon className="h-4 w-4 text-gray-600 ml-2" />
+            <FaceSmileIcon className="h-4 w-4 ml-2 text-color-dark" />
           </form>
         )}
       </div>

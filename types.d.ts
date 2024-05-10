@@ -40,5 +40,7 @@ type LayoutProps = Readonly<{
 
 interface StateStore {
   open: boolean;
+  isLightTheme: boolean;
+  setLightTheme: (isLightTheme: boolean) => void;
   setOpen: (isOpen: boolean) => void;
 }

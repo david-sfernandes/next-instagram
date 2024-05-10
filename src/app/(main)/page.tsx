@@ -4,10 +4,11 @@ import Modal from "@/components/Modal";
 
 export default async function Page() {
   const session = await auth();
+  
   return (
-    <main className="flex">
+    <main className="flex bg-lighter">
       <Feed />
-      {/* {session && <Modal session={session}/>} */}
+      {session && <Modal session={session}/>}
     </main>
   );
 }
