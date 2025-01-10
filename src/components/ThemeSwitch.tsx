@@ -1,12 +1,9 @@
 "use client";
-
-import useStateStore from "@/store/state";
 import { Switch } from "@headlessui/react";
 import { useTheme } from "next-themes";
 
 export default function ThemeSwitch() {
   const { theme, setTheme } = useTheme();
-  // change the theme
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };

@@ -1,16 +1,6 @@
 "use client";
 import { db } from "@/firebase";
-import {
-  BookmarkIcon,
-  ChatBubbleBottomCenterIcon,
-  HeartIcon,
-  PaperAirplaneIcon,
-  FaceSmileIcon
-} from "@heroicons/react/24/outline";
-import {
-  EllipsisHorizontalIcon,
-  HeartIcon as SolidHeartIcon,
-} from "@heroicons/react/24/solid";
+import { User } from "@/types/user";
 import {
   addDoc,
   collection,
@@ -24,11 +14,19 @@ import {
   QuerySnapshot,
   serverTimestamp,
 } from "firebase/firestore";
+import {
+  BookmarkIcon,
+  EllipsisIcon,
+  MessageCircleIcon,
+  SendIcon,
+  SmileIcon,
+  HeartIcon as SolidHeartIcon
+} from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import LikesCounter from "./LikesCounter";
 
-type PostWithSession = PostProps & { session: CustomSession };
+type PostWithSession = PostProps & { user: User | null };
 
 export default function Post({
   id,
@@ -36,7 +34,7 @@ export default function Post({
   userImg,
   img,
   caption,
-  session,
+  user,
 }: PostWithSession) {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState<
@@ -59,21 +57,21 @@ export default function Post({
     e.preventDefault();
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: comment,
-      username: (session as CustomSession).user.username,
-      profileImg: session?.user?.image,
+      username: user?.username,
+      profileImg: user?.image,
       timestamp: serverTimestamp(),
     });
     setComment("");
   };
 
   const likePost = async () => {
-    if (!session) return;
+    if (!user) return;
     if (hasLiked) {
       await deleteDoc(doc(db, `posts/${id}/likes/${likeIndex}`));
     } else {
       await addDoc(collection(db, `posts/${id}/likes`), {
-        username: (session as CustomSession).user.username,
-        userId: session?.user?.id,
+        username: user.username,
+        userId: user.email,
       });
     }
   };
@@ -96,9 +94,9 @@ export default function Post({
   };
 
   const verifyUserLike = () => {
-    if (!session) return;
+    if (!user) return;
     let likePos = likes.findIndex(
-      (like) => like.data().userId === session?.user?.id
+      (like) => like.data().userId === user.email
     );
     setHasLiked(false);
     if (likePos > -1) {
@@ -119,7 +117,7 @@ export default function Post({
             outline-zinc-300 outline-offset-2"
         />
         <p className="flex-1 font-bold">{username}</p>
-        <EllipsisHorizontalIcon className="post-btn" />
+        <EllipsisIcon className="post-btn" />
       </div>
       <Image
         className="object-cover w-full md:rounded"
@@ -129,16 +127,12 @@ export default function Post({
         alt="Post image"
       />
       <div className="flex gap-3 py-3 px-4 md:px-0">
-        {hasLiked ? (
-          <SolidHeartIcon
-            onClick={likePost}
-            className="post-btn text-red-500"
-          />
-        ) : (
-          <HeartIcon onClick={likePost} className="post-btn" />
-        )}
-        <ChatBubbleBottomCenterIcon className="post-btn" />
-        <PaperAirplaneIcon className="post-btn -rotate-45" />
+        <SolidHeartIcon
+          onClick={likePost}
+          className={`post-btn ${hasLiked ? "text-red-500" : ""}`}
+        />
+        <MessageCircleIcon className="post-btn" />
+        <SendIcon className="post-btn -rotate-45" />
         <BookmarkIcon className="post-btn ml-auto" />
       </div>
       <div className="px-4 md:px-0">
@@ -170,24 +164,23 @@ export default function Post({
             ))}
           </div>
         )}
-        {session && (
+        {user && (
           <form className="flex items-center pb-4 pt-1" onSubmit={sendComment}>
             <input
               type="text"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Adicione um comentário..."
               className="border-none flex-1 focus:ring-0 outline-none text-sm p-0 bg-transparent dark:placeholder:text-zinc-400/80"
-              // submit on press enter button
             />
             <button
-              disabled={comment.trim() == "" || session == null}
+              disabled={comment.trim() == ""}
               type="submit"
               className="action-btn"
               onClick={(e) => sendComment(e)}
             >
               Publicar
             </button>
-            <FaceSmileIcon className="h-4 w-4 ml-2 text-color-dark" />
+            <SmileIcon className="h-4 w-4 ml-2 text-color-dark" />
           </form>
         )}
       </div>

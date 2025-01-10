@@ -1,5 +1,5 @@
 "use client";
-import { HeartIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { HeartIcon, SearchIcon } from "lucide-react"
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,31 +11,24 @@ export default function Header() {
       <div className="flex h-full w-full px-4 items-center justify-between">
         <Link href="/" className="relative h-7">
           <Image
-            src={
-              theme === "dark"
-                ? "/lg-instagram-white-icon.png"
-                : "https://links.papareact.com/ocw"
-            }
+            src="/lg-instagram-white-icon.png"
             alt="Instagram Logo"
-            className="object-contain hidden h-7 w-[103px] sm:inline-block"
+            className={`object-contain hidden h-7 w-[103px] sm:inline-block 
+              ${theme === 'dark' ? 'invert-0' : 'invert'}`}
             height={28}
             width={90}
           />
           <Image
-            src={
-              theme === "dark"
-                ? "/instagram-white-icon.png"
-                : "https://links.papareact.com/jjm"
-            }
+            src="/instagram-white-icon.png"
             alt="Instagram Logo"
-            className="object-contain h-7 sm:hidden"
+            className={`object-contain h-7 sm:hidden ${theme === 'dark' ? 'invert-0' : 'invert'}`}
             height={28}
             width={28}
           />
         </Link>
         <div className="flex items-center max-w-[268px] h-9">
           <div className="flex rounded-lg mx-auto px-4 py-1 items-center bg-dark">
-            <MagnifyingGlassIcon className="h-5 w-5 text-color-light" />
+            <SearchIcon className="h-5 w-5 text-color-light" />
             <input
               type="text"
               className="outline-none block w-full pl-2 sm:text-sm 

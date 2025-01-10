@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import {
   Menu,
   MenuButton,
@@ -7,23 +6,21 @@ import {
   Transition,
 } from "@headlessui/react";
 import {
-  Bars3Icon,
-  ChatBubbleOvalLeftEllipsisIcon,
   HeartIcon,
-  MagnifyingGlassIcon,
+  HomeIcon,
   MapPinIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/outline";
-import { HomeIcon, PlayIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
+  MenuIcon,
+  MessageCircleIcon,
+  PlayIcon,
+  SearchIcon,
+} from "lucide-react";
 import Link from "next/link";
+import NavCreatePostBtn from "./NavCreatePostBtn";
+import NavLogo from "./NavLogo";
 import ProfileItem from "./ProfileItem";
 import ThemeSwitch from "./ThemeSwitch";
-import NavLogo from "./NavLogo";
-import NavCreatePostBtn from "./NavCreatePostBtn";
 
 export default async function Header() {
-  const session = await auth();
 
   return (
     <nav className="nav-sm-view md:nav-md-view min-w-0 xl:min-w-[245px] bg-lighter z-10">
@@ -34,7 +31,7 @@ export default async function Header() {
           <p className="nav-text">Página inicial</p>
         </Link>
         <div className="hidden md:nav-item">
-          <MagnifyingGlassIcon className="nav-icon m-[14px]" />
+          <SearchIcon className="nav-icon m-[14px]" />
           <p className="nav-text">Pesquisa</p>
         </div>
         <div className="nav-item">
@@ -46,7 +43,7 @@ export default async function Header() {
           <p className="nav-text">Reels</p>
         </div>
         <div className="nav-item">
-          <ChatBubbleOvalLeftEllipsisIcon className="nav-icon m-[14px]" />
+          <MessageCircleIcon className="nav-icon m-[14px]" />
           <p className="nav-text">Mensagens</p>
         </div>
         <div className="hidden md:nav-item">
@@ -54,12 +51,12 @@ export default async function Header() {
           <p className="nav-text">Notificações</p>
         </div>
         <NavCreatePostBtn />
-        <ProfileItem session={session} />
+        <ProfileItem />
       </div>
       <div className="hidden md:nav-md-content md:px-2 justify-end mt-auto">
         <Menu>
           <MenuButton className="nav-item mb-5">
-            <Bars3Icon className="nav-icon m-[14px]" />
+            <MenuIcon className="nav-icon m-[14px]" />
             <p className="nav-text">Mais</p>
           </MenuButton>
           <Transition

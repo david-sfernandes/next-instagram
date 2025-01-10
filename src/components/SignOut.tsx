@@ -1,10 +1,11 @@
-"use client";
-import { signOut } from "next-auth/react";
+import { SignedOut } from "@clerk/nextjs";
 
 export default function SignOut() {
   return (
-    <button onClick={() => signOut()} className="action-btn text-sm">
-      Mudar
-    </button>
+    <SignedOut>
+      <button className="action-btn text-sm">
+        Mudar
+      </button>
+    </SignedOut>
   );
 }

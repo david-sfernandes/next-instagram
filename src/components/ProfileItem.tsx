@@ -1,29 +1,25 @@
 "use client";
-import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/solid";
-import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
-import Image from "next/image";
+import { SignedOut, SignInButton, useUser } from "@clerk/nextjs";
+import { LogInIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function ProfileItem({ session }: { session: Session | null}) {
-  if (!session) {
+export default function ProfileItem() {
+  const { user } = useUser();
+
+  if (!user) {
     return (
       <Link href={"/signin"} className="nav-item">
-        <ArrowLeftEndOnRectangleIcon className="nav-icon m-3" />
+        <LogInIcon className="nav-icon m-3" />
         <p className="nav-text">Sign in</p>
       </Link>
     );
   }
   return (
-    <button className="nav-item" onClick={() => signOut()}>
-      <Image
-        src={String(session.user?.image)}
-        className="h-7 w-7 rounded-full m-3"
-        height={50}
-        width={50}
-        alt="User avatar"
-      />
-      <p className="nav-text">Perfil</p>
-    </button>
+    <SignedOut>
+      <div className="flex items-center">
+        <SignInButton />
+        <p className="nav-text">Perfil</p>
+      </div>
+    </SignedOut>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import useStateStore from "@/store/state";
+import { useUser } from "@clerk/nextjs";
 import {
   Button,
   Dialog,
@@ -8,7 +9,6 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
-import { CameraIcon } from "@heroicons/react/24/solid";
 import {
   addDoc,
   collection,
@@ -17,13 +17,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
-import { Session } from "next-auth";
+import { CameraIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import { db, storage } from "../firebase";
 
 type FileResult = string | ArrayBuffer | null | undefined;
 
-export default function Modal({ session }: { session: Session }) {
+export default function Modal() {
+  const { user } = useUser();
   const { open, setOpen } = useStateStore();
 
   const [loading, setLoading] = useState(false);
@@ -37,9 +38,9 @@ export default function Modal({ session }: { session: Session }) {
     console.log(collection(db, "posts"));
 
     const docRef = await addDoc(collection(db, "posts"), {
-      username: session.user?.name,
+      username: user?.username,
       caption: captionRef.current?.value,
-      profileImg: session?.user?.image,
+      profileImg: user?.imageUrl,
       timestamp: serverTimestamp(),
     });
     console.log("Doc id: ", docRef.id);
@@ -66,6 +67,8 @@ export default function Modal({ session }: { session: Session }) {
       setSelectedFile(readerEvent.target?.result);
     };
   };
+
+  if (!user) return null;
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 import useStateStore from "@/store/state";
-import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon } from "lucide-react";
 
 export default function NavCreatePostBtn() {
   const { setOpen } = useStateStore();

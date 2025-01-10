@@ -1,7 +1,14 @@
 import GoogleBtn from "@/components/GoogleBtn";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default async function SignIn() {
+  const { sessionClaims } = await auth();
+  if (sessionClaims?.email) {
+    redirect("/");
+  }
+
   return (
     <main
       className=" flex flex-col justify-center items-center h-screen pt-5 bg-light

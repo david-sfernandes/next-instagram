@@ -1,11 +1,12 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
 import { faker } from "@faker-js/faker";
-import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import Story from "./Story";
 
-export default function Stories({ session }: { session: Session | null }) {
+export default function Stories() {
   const [suggestions, setSuggestions] = useState<StoryProps[]>([]);
+  const { user } = useUser();
 
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
@@ -22,14 +23,13 @@ export default function Stories({ session }: { session: Session | null }) {
 
   return (
     <section
-      className="flex gap-5 p-2 bg-lighter md:mt-7
-      rounded-lg overflow-x-scroll scrollbar-thin 
-    scrollbar-thumb-black"
+      className="flex gap-5 p-2 bg-lighter md:mt-7 rounded-lg
+      overflow-x-scroll scrollbar-thin scrollbar-thumb-black"
     >
-      {session && (
+      {user && (
         <Story
-          img={String(session.user?.image)}
-          username={session.user?.name!}
+          img={user.imageUrl}
+          username={user.username || user.firstName || ""}
         />
       )}
       {suggestions.map((profile) => (

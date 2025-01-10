@@ -1,4 +1,6 @@
 "use client";
+import { User } from "@/types/user";
+import { useUser } from "@clerk/nextjs";
 import {
   collection,
   DocumentData,
@@ -6,15 +8,14 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Post from "./Post";
 
-export default function Posts({ session }: { session: Session | null}) {
+export default function Posts() {
   const [posts, setPosts] = useState<DocumentData[]>([]);
-  console.log(posts);
-  
+  const { user } = useUser();
+
   useEffect(
     () =>
       onSnapshot(
@@ -34,7 +35,7 @@ export default function Posts({ session }: { session: Session | null}) {
           userImg={post.data().profileImg}
           img={post.data().image}
           caption={post.data().caption}
-          session={session}
+          user={user as (User | null)}
         />
       ))}
     </section>

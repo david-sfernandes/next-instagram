@@ -12,24 +12,18 @@ export default function NavLogo() {
       className="hidden md:flex md:mt-9 md:mb-7 justify-center xl:justify-start"
     >
       <Image
-        src={
-          theme === "dark"
-            ? "/lg-instagram-white-icon.png"
-            : "https://links.papareact.com/ocw"
-        }
+        src="/lg-instagram-white-icon.png"
         alt="Instagram Logo"
-        className="object-contain h-[29px] w-[104px] hidden xl:inline-block ml-3"
+        className={`object-contain h-[29px] w-[104px] hidden xl:inline-block ml-3 
+          ${theme === "dark" ? "invert-0" : "invert"}`}
         height={28}
         width={90}
       />
       <Image
-        src={
-          theme === "dark"
-            ? "/instagram-white-icon.png"
-            : "https://links.papareact.com/jjm"
-        }
+        src="/instagram-white-icon.png"
         alt="Instagram Logo"
-        className="object-contain h-8 inline-block xl:hidden"
+        className={`object-contain h-8 inline-block xl:hidden 
+          ${theme === "dark" ? "invert-0" : "invert"}`}
         height={28}
         width={28}
       />

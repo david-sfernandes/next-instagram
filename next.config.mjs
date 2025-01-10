@@ -2,6 +2,7 @@
 const nextConfig = {
   images: {
     domains: [
+      'img.clerk.com',
       'links.papareact.com',
       'cloudflare-ipfs.com',
       'i.kym-cdn.com',

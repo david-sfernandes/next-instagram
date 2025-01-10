@@ -9,7 +9,7 @@ export default function Suggestions() {
   useEffect(() => {
     const suggestions = [...Array(5)].map((_, item) => ({
       userId: item + "suggestion",
-      username: faker.internet.userName(),
+      username: faker.internet.username(),
       email: faker.internet.email(),
       avatar: faker.image.avatar(),
       password: faker.internet.password(),
