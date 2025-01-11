@@ -11,7 +11,7 @@ export default function Stories() {
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({
       userId: faker.string.uuid(),
-      username: faker.internet.userName(),
+      username: faker.internet.username(),
       email: faker.internet.email(),
       avatar: faker.image.avatar(),
       password: faker.internet.password(),

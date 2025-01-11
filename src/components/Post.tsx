@@ -57,7 +57,7 @@ export default function Post({
     e.preventDefault();
     await addDoc(collection(db, "posts", id, "comments"), {
       comment: comment,
-      username: user?.username,
+      username: `${user?.firstName} ${user?.lastName}`,
       profileImg: user?.image,
       timestamp: serverTimestamp(),
     });
@@ -70,7 +70,7 @@ export default function Post({
       await deleteDoc(doc(db, `posts/${id}/likes/${likeIndex}`));
     } else {
       await addDoc(collection(db, `posts/${id}/likes`), {
-        username: user.username,
+        username: `${user?.firstName} ${user?.lastName}`,
         userId: user.email,
       });
     }
@@ -106,7 +106,7 @@ export default function Post({
   };
 
   return (
-    <article className="my-2 pb-2 border-b border-zinc-300 dark:border-zinc-800 text-sm max-w-[470px] text-color-darker">
+    <article className="my-2 pb-2 border-b border-zinc-300 dark:border-zinc-800 text-sm w-full max-w-[470px] text-color-darker">
       <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}
@@ -132,7 +132,7 @@ export default function Post({
           className={`post-btn ${hasLiked ? "text-red-500" : ""}`}
         />
         <MessageCircleIcon className="post-btn" />
-        <SendIcon className="post-btn -rotate-45" />
+        <SendIcon className="post-btn" />
         <BookmarkIcon className="post-btn ml-auto" />
       </div>
       <div className="px-4 md:px-0">

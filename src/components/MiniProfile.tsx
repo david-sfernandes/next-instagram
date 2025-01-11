@@ -15,7 +15,7 @@ export default async function MiniProfile() {
         height={50}
       />
       <div className="flex-1 mx-4">
-        <h2 className="font-bold">{sessionClaims?.firstName}</h2>
+        <h2 className="font-bold">{sessionClaims?.fullName}</h2>
         <h3 className="text-sm text-color-dark">Bem-vindo</h3>
       </div>
       <SignOut />

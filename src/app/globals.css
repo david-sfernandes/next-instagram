@@ -6,7 +6,9 @@
   /* Stories */
   .stories-section {
     @apply flex gap-5 p-2 bg-lighter md:mt-5 rounded-lg
-    overflow-x-scroll scrollbar-thin scrollbar-thumb-black;
+    overflow-x-scroll scrollbar-thin 
+    scrollbar-thumb-zinc-900 scrollbar-track-zinc-100
+    dark:scrollbar-thumb-zinc-400 dark:scrollbar-track-zinc-800;
 
     ::-webkit-scrollbar-button {
       @apply hidden;

@@ -38,7 +38,7 @@ export default function Modal() {
     console.log(collection(db, "posts"));
 
     const docRef = await addDoc(collection(db, "posts"), {
-      username: user?.username,
+      username: `${user?.firstName} ${user?.lastName}`,
       caption: captionRef.current?.value,
       profileImg: user?.imageUrl,
       timestamp: serverTimestamp(),
@@ -78,7 +78,7 @@ export default function Modal() {
           className="relative z-10 focus:outline-none"
           onClose={setOpen}
         >
-          <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-zinc-800/70">
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto bg-black/70">
             <div className="flex min-h-full items-center justify-center">
               <TransitionChild
                 enter="ease-out duration-300"
@@ -88,10 +88,10 @@ export default function Modal() {
                 leaveFrom="opacity-100 transform-[scale(100%)]"
                 leaveTo="opacity-0 transform-[scale(95%)]"
               >
-                <DialogPanel className="w-full max-w-md rounded-xl bg-dark flex flex-col gap-3 justify-center items-center">
+                <DialogPanel className="w-full max-w-md rounded-xl bg-white dark:bg-zinc-950 flex flex-col gap-3 justify-center items-center">
                   <DialogTitle
                     as="h3"
-                    className="text-base/7 font-medium text-color-darker text-center border-b border-gray-500/10 p-1 w-full pb-3"
+                    className="text-base/7 font-medium text-color-darker text-center border-b border-gray-500/10 p-1 w-full"
                   >
                     Crie uma nova publicação
                   </DialogTitle>
