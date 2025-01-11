@@ -22,10 +22,7 @@ export default function Stories() {
   }, []);
 
   return (
-    <section
-      className="flex gap-5 p-2 bg-lighter md:mt-7 rounded-lg
-      overflow-x-scroll scrollbar-thin scrollbar-thumb-black"
-    >
+    <section className="stories-section">
       {user && (
         <Story
           img={user.imageUrl}

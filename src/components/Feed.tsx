@@ -11,13 +11,13 @@ export default async function Feed() {
     <div
       className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full md:px-1`}
     >
-      <section className="w-full max-w-[630px] mx-auto py-16 md:py-0">
+      <section className="w-full max-w-[630px] py-16 md:py-0 md:mr-16">
         <Stories />
         <Posts />
       </section>
       {sessionId && (
-        <section className="hidden xl:inline-grid w-[383px] pl-16 justify-items-end">
-          <div className="fixed">
+        <section className="hidden xl:block justify-items-end w-[319px]">
+          <div className="fixed top-0 flex flex-col w-[319px] px-4">
             <MiniProfile />
             <Suggestions />
           </div>

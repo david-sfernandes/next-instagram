@@ -28,7 +28,7 @@ export default async function Header() {
         <NavLogo />
         <Link href="/" className="nav-item">
           <HomeIcon className="nav-icon m-[14px]" />
-          <p className="nav-text">Página inicial</p>
+          <p className="nav-text font-medium">Página inicial</p>
         </Link>
         <div className="hidden md:nav-item">
           <SearchIcon className="nav-icon m-[14px]" />

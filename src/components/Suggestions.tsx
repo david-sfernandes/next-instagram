@@ -22,17 +22,17 @@ export default function Suggestions() {
   }, []);
 
   return (
-    <section className="w-full px-4">
-      <div className="flex justify-between text-sm mb-5 max-w-full">
-        <h3 className="text-xs font-bold text-color-lighter">
+    <section className="w-full flex flex-col">
+      <div className="flex justify-between text-sm mb-2 mt-6 max-w-full">
+        <h3 className="text-sm font-bold text-zinc-600">
           Sugestões para você
         </h3>
-        <button className="text-gray-600 font-semibold">Ver tudo</button>
+        <button className="text-black font-semibold text-xs">Ver tudo</button>
       </div>
       {suggestions.map((suggestion) => (
         <div
           key={suggestion.userId}
-          className="flex items-center justify-between mt-3 gap-2"
+          className="grid grid-cols-[44px_1fr_38px] items-center mt-3 gap-2 w-full flex-nowrap"
         >
           <Image
             className="profile-img w-11 h-11"
@@ -41,17 +41,17 @@ export default function Suggestions() {
             height={40}
             alt=""
           />
-          <div className="flex-1 ml-4">
+          <div className="w-full overflow-hidden">
             <h2 className="font-semibold text-sm">{suggestion.username}</h2>
             <h3 className="text-gray-400 text-xs max-w-[207px] truncate">
               Trabalha em {suggestion.company.name()}
             </h3>
           </div>
-          <button className="action-btn text-sm">Seguir</button>
+          <button className="action-btn">Seguir</button>
         </div>
       ))}
-      <ul className="text-xs flex flex-wrap w-[320px] py-2 mt-9 text-color-lighter">
-        <li className="text-xs">Sobre</li>
+      <ul className="text-xs flex flex-wrap w-full mt-9 text-color-lighter">
+        <li className="footer-menu-item before:content-['']">Sobre</li>
         <li className="footer-menu-item">Ajuda</li>
         <li className="footer-menu-item">Imprensa</li>
         <li className="footer-menu-item">API</li>
@@ -63,7 +63,7 @@ export default function Suggestions() {
         <li className="footer-menu-item">Meta Verified</li>
       </ul>
       <p className="text-xs text-color-lighter mt-3">
-        © 2024 Instagram Clone by{" "}
+        © 2025 Instagram Clone by{" "}
         <a href="https://github.com/david-sfernandes" className="underline">
           David S.
         </a>

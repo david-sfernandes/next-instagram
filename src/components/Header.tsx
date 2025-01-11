@@ -15,15 +15,15 @@ export default function Header() {
             alt="Instagram Logo"
             className={`object-contain hidden h-7 w-[103px] sm:inline-block 
               ${theme === 'dark' ? 'invert-0' : 'invert'}`}
-            height={28}
-            width={90}
+            height={56}
+            width={180}
           />
           <Image
             src="/instagram-white-icon.png"
             alt="Instagram Logo"
             className={`object-contain h-7 sm:hidden ${theme === 'dark' ? 'invert-0' : 'invert'}`}
-            height={28}
-            width={28}
+            height={56}
+            width={56}
           />
         </Link>
         <div className="flex items-center max-w-[268px] h-9">

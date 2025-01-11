@@ -1,11 +1,11 @@
-import { SignedOut } from "@clerk/nextjs";
+import { SignedOut, SignOutButton } from "@clerk/nextjs";
 
 export default function SignOut() {
   return (
-    <SignedOut>
-      <button className="action-btn text-sm">
+    <SignOutButton>
+      <button className="action-btn">
         Mudar
       </button>
-    </SignedOut>
+    </SignOutButton>
   );
 }

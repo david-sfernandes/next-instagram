@@ -3,6 +3,16 @@
 @tailwind utilities;
 
 @layer components {
+  /* Stories */
+  .stories-section {
+    @apply flex gap-5 p-2 bg-lighter md:mt-5 rounded-lg
+    overflow-x-scroll scrollbar-thin scrollbar-thumb-black;
+
+    ::-webkit-scrollbar-button {
+      @apply hidden;
+    }
+  }
+
   /* Nav */
   .nav-icon {
     @apply h-7 w-7 cursor-pointer transform transition-all duration-150 ease-out group-hover:scale-125 text-color-darker;
@@ -13,7 +23,7 @@
   }
 
   .nav-text {
-    @apply font-semibold hidden xl:block;
+    @apply font-light hidden xl:block;
   }
 
   .nav-sm-view {
@@ -45,14 +55,13 @@
     @apply font-semibold text-blue-400 text-xs disabled:text-transparent;
   }
 
-  .profile-img  {
+  .profile-img {
     @apply rounded-full object-cover cursor-pointer transform transition duration-200 ease-out;
   }
 
   .footer-menu-item {
-    @apply before:content-['·'] before:p-1 text-xs;
+    @apply before:content-['·'] before:p-[2px] text-[11px] text-zinc-400/85;
   }
-
 
   /*Theme*/
   .text-color-darker {
