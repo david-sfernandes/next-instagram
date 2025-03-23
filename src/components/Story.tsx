@@ -11,7 +11,7 @@ export default function Story({
     <div>
       <Image
         src={img}
-        alt={username + " avatar"}
+        alt={`${username} avatar`}
         width="100"
         height="100"
         className="profile-img  h-14 w-14 outline outline-red-400

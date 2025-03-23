@@ -1,9 +1,9 @@
 "use client";
-import { User } from "@/types/user";
+import type { User } from "@/types/user";
 import { useUser } from "@clerk/nextjs";
 import {
   collection,
-  DocumentData,
+  type DocumentData,
   onSnapshot,
   orderBy,
   query,
@@ -22,7 +22,7 @@ export default function Posts() {
         query(collection(db, "posts"), orderBy("timestamp", "desc")),
         (snapshot) => setPosts(snapshot.docs)
       ),
-    [db]
+    []
   );
 
   return (

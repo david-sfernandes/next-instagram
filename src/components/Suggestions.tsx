@@ -8,7 +8,7 @@ export default function Suggestions() {
 
   useEffect(() => {
     const suggestions = [...Array(5)].map((_, item) => ({
-      userId: item + "suggestion",
+      userId: `${item}suggestion`,
       username: faker.internet.username(),
       email: faker.internet.email(),
       avatar: faker.image.avatar(),
@@ -27,7 +27,7 @@ export default function Suggestions() {
         <h3 className="text-sm font-bold text-zinc-600">
           Sugestões para você
         </h3>
-        <button className="text-black font-semibold text-xs">Ver tudo</button>
+        <button type="button" className="text-black font-semibold text-xs">Ver tudo</button>
       </div>
       {suggestions.map((suggestion) => (
         <div
@@ -47,7 +47,7 @@ export default function Suggestions() {
               Trabalha em {suggestion.company.name()}
             </h3>
           </div>
-          <button className="action-btn">Seguir</button>
+          <button type="button" className="action-btn">Seguir</button>
         </div>
       ))}
       <ul className="text-xs flex flex-wrap w-full mt-9 text-color-lighter">

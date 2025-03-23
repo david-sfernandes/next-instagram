@@ -6,7 +6,7 @@ export default function NavCreatePostBtn() {
   const { setOpen } = useStateStore();
 
   return (
-    <button className="nav-item" onClick={() => setOpen(true)}>
+    <button type="button" className="nav-item" onClick={() => setOpen(true)}>
       <PlusCircleIcon className="nav-icon m-[14px]" />
       <p className="nav-text">Criar</p>
     </button>

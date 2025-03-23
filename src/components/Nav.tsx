@@ -73,7 +73,7 @@ export default async function Header() {
               text-zinc-950 dark:text-zinc-100 [--anchor-gap:var(--spacing-1)] focus:outline-none shadow-lg z-10"
             >
               <MenuItem>
-                <button className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
+                <button type="button" className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10">
                   Alterar exibição
                   <ThemeSwitch />
                 </button>

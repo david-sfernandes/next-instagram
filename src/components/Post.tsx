@@ -1,17 +1,17 @@
 "use client";
 import { db } from "@/firebase";
-import { User } from "@/types/user";
+import type { User } from "@/types/user";
 import {
   addDoc,
   collection,
   deleteDoc,
   doc,
-  DocumentData,
+  type DocumentData,
   onSnapshot,
   orderBy,
   query,
-  QueryDocumentSnapshot,
-  QuerySnapshot,
+  type QueryDocumentSnapshot,
+  type QuerySnapshot,
   serverTimestamp,
 } from "firebase/firestore";
 import {
@@ -47,11 +47,11 @@ export default function Post({
   useEffect(() => {
     getComments();
     getLikes();
-  }, [db, id]);
+  }, []);
 
   useEffect(() => {
     verifyUserLike();
-  }, [likes]);
+  }, []);
 
   const sendComment = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -95,7 +95,7 @@ export default function Post({
 
   const verifyUserLike = () => {
     if (!user) return;
-    let likePos = likes.findIndex(
+    const likePos = likes.findIndex(
       (like) => like.data().userId === user.email
     );
     setHasLiked(false);
@@ -110,7 +110,7 @@ export default function Post({
       <div className="flex items-center py-2 px-3">
         <Image
           src={userImg}
-          alt={username + " image"}
+          alt={`${username} image`}
           width={32}
           height={32}
           className="profile-img w-8 h-8 mr-2 outline outline-1 
@@ -173,7 +173,7 @@ export default function Post({
               className="border-none flex-1 focus:ring-0 outline-none text-sm p-0 bg-transparent dark:placeholder:text-zinc-400/80"
             />
             <button
-              disabled={comment.trim() == ""}
+              disabled={comment.trim() === ""}
               type="submit"
               className="action-btn"
               onClick={(e) => sendComment(e)}

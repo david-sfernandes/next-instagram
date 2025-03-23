@@ -60,9 +60,9 @@ export default function Modal() {
     setSelectedFile(null);
   };
 
-  const addImageToPost = (e: any) => {
+  const addImageToPost = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
-    if (e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+    if (e.target.files?.length && e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
     reader.onload = (readerEvent: ProgressEvent<FileReader>) => {
       setSelectedFile(readerEvent.target?.result);
     };
@@ -100,11 +100,13 @@ export default function Modal() {
                       src={selectedFile.toString()}
                       className="w-full object-contain cursor-pointer"
                       onClick={() => setSelectedFile(null)}
+                      onKeyDown={e => e.key === "Enter" && filePickerRef.current?.click()}
                       alt=""
                     />
                   ) : (
                     <div
                       onClick={() => filePickerRef.current?.click()}
+                      onKeyDown={e => e.key === "Enter" && filePickerRef.current?.click()}
                       className="flex flex-col py-2 items-center justify-center cursor-pointer"
                     >
                       <input

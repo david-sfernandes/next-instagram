@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 
 const useStateStore = create<StateStore>()(
   persist(
-    (set, get) => ({
+    (set, _) => ({
       open: false,
       isLightTheme: true,
       setLightTheme: (isLightTheme: boolean) => set({ isLightTheme: isLightTheme }),

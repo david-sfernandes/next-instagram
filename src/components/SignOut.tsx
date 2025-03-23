@@ -1,9 +1,9 @@
-import { SignedOut, SignOutButton } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 
 export default function SignOut() {
   return (
     <SignOutButton>
-      <button className="action-btn">
+      <button type="button" className="action-btn">
         Mudar
       </button>
     </SignOutButton>

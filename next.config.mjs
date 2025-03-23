@@ -1,16 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: [
-      'img.clerk.com',
-      'links.papareact.com',
-      'cloudflare-ipfs.com',
-      'i.kym-cdn.com',
-      'lh3.googleusercontent.com',
-      'firebasestorage.googleapis.com',
-      'avatars.githubusercontent.com'
-    ],
-  },
+	images: {
+		remotePatterns: [
+			{ hostname: "img.clerk.com" },
+			{ hostname: "links.papareact.com" },
+			{ hostname: "cloudflare-ipfs.com" },
+			{ hostname: "i.kym-cdn.com" },
+			{ hostname: "lh3.googleusercontent.com" },
+			{ hostname: "firebasestorage.googleapis.com" },
+			{ hostname: "avatars.githubusercontent.com" },
+			{ hostname: "cdn.jsdelivr.net" },
+		],
+	},
 };
 
 export default nextConfig;

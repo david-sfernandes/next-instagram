@@ -9,7 +9,7 @@ export default async function Feed() {
 
   return (
     <div
-      className={`md:ml-[70px] xl:ml-[244px] flex justify-center w-full md:px-1`}
+      className="md:ml-[70px] xl:ml-[244px] flex justify-center w-full md:px-1"
     >
       <section className="w-full max-w-[630px] py-16 md:py-0 md:mr-16">
         <Stories />
